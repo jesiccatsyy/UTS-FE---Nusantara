@@ -273,7 +273,6 @@ const searchBtn = document.getElementById('searchBtn');
 const filterButtons = document.querySelectorAll('.btn-filter');
 const modal = document.getElementById('detailModal');
 const closeModal = document.querySelector('.close-modal');
-const mulaiJelajahBtn = document.getElementById('mulaiJelajah');
 const totalFavoritSpan = document.getElementById('totalFavorit');
 const totalPakaianSpan = document.getElementById('totalPakaian');
 
@@ -458,15 +457,46 @@ function searchPakaian() {
             return;
         }
     } else {
+        // Filter berdasarkan keyword - lebih fokus ke origin (provinsi)
         filteredData = pakaianAdatData.filter(item => 
             item.name.toLowerCase().includes(keyword) ||
             item.origin.toLowerCase().includes(keyword) ||
             item.category.toLowerCase().includes(keyword) ||
             item.description.toLowerCase().includes(keyword)
         );
+        
+        // Jika ada hasil, reset filter ke "Semua"
+        if (filteredData.length > 0) {
+            filterButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === 'semua') {
+                    btn.classList.add('active');
+                }
+            });
+            currentFilter = 'semua';
+        }
     }
     
     renderCards(filteredData);
+    
+    // Scroll ke hasil pencarian (card grid)
+    if (keyword !== '') {
+        setTimeout(() => {
+            const cardGrid = document.getElementById('cardGrid');
+            if (cardGrid) {
+                const headerHeight = document.querySelector('.header-batik')?.offsetHeight || 0;
+                const filterSection = document.querySelector('.filter-container')?.offsetHeight || 0;
+                const offset = 100;
+                const elementPosition = cardGrid.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerHeight - offset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }, 100);
+    }
 }
 
 function showNotification(message) {
@@ -494,6 +524,7 @@ function showNotification(message) {
     }, 2500);
 }
 
+// Event Listeners
 filterButtons.forEach(btn => {
     btn.addEventListener('click', () => {
         filterButtons.forEach(b => b.classList.remove('active'));
@@ -533,15 +564,58 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-mulaiJelajahBtn.addEventListener('click', () => {
-    document.getElementById('koleksi').scrollIntoView({ behavior: 'smooth' });
-});
+// SMOOTH SCROLL - Tombol "Mulai Menjelajah"
+function initSmoothScroll() {
+    const btn = document.getElementById('mulaiJelajah');
+    if (!btn) return;
 
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        const koleksiSection = document.getElementById('koleksi');
+        if (koleksiSection) {
+            const headerHeight = document.querySelector('.header-batik')?.offsetHeight || 0;
+            const offset = 20;
+            const elementPosition = koleksiSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerHeight - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+            
+            // Animasi bounce pada judul section
+            const sectionTitle = koleksiSection.querySelector('.section-title');
+            if (sectionTitle) {
+                sectionTitle.style.animation = 'none';
+                setTimeout(() => {
+                    sectionTitle.style.animation = 'bounceIn 0.6s ease';
+                }, 10);
+            }
+        }
+    });
+
+    console.log('✅ Smooth scroll initialized');
+}
+
+// Navigation links smooth scroll
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
         const targetId = link.getAttribute('href');
-        document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+        const targetSection = document.querySelector(targetId);
+        
+        if (targetSection) {
+            const headerHeight = document.querySelector('.header-batik')?.offsetHeight || 0;
+            const offset = 20;
+            const elementPosition = targetSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerHeight - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
         
         document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
         link.classList.add('active');
@@ -577,6 +651,33 @@ function initApp() {
                 opacity: 0;
             }
         }
+        
+        @keyframes bounceIn {
+            0%, 20%, 40%, 60%, 80%, 100% {
+                transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            }
+            0% {
+                opacity: 0;
+                transform: scale3d(.3, .3, .3);
+            }
+            20% {
+                transform: scale3d(1.1, 1.1, 1.1);
+            }
+            40% {
+                transform: scale3d(.9, .9, .9);
+            }
+            60% {
+                opacity: 1;
+                transform: scale3d(1.03, 1.03, 1.03);
+            }
+            80% {
+                transform: scale3d(.97, .97, .97);
+            }
+            100% {
+                opacity: 1;
+                transform: scale3d(1, 1, 1);
+            }
+        }
     `;
     document.head.appendChild(style);
     
@@ -584,12 +685,7 @@ function initApp() {
     console.log(`Total pakaian adat: ${pakaianAdatData.length}`);
 }
 
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initApp);
-} else {
-    initApp();
-}
-
+// Hero Effects
 function initHeroParallax() {
     const heroSection = document.querySelector('.hero-section');
     const heroContent = document.querySelector('.hero-content');
@@ -763,72 +859,6 @@ function initSparkleEffect() {
     console.log('✨ Sparkle effect activated');
 }
 
-function initSmoothScroll() {
-    const btn = document.getElementById('mulaiJelajah');
-    if (!btn) return;
-
-    btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        const koleksiSection = document.getElementById('koleksi');
-        if (koleksiSection) {
-            const headerHeight = document.querySelector('.header-batik').offsetHeight;
-            const offset = 80;
-            const elementPosition = koleksiSection.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerHeight - offset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
-            
-            const sectionTitle = koleksiSection.querySelector('.section-title');
-            if (sectionTitle) {
-                sectionTitle.style.animation = 'none';
-                setTimeout(() => {
-                    sectionTitle.style.animation = 'bounceIn 0.6s ease';
-                }, 10);
-            }
-        }
-    });
-
-    if (!document.getElementById('bounceStyle')) {
-        const style = document.createElement('style');
-        style.id = 'bounceStyle';
-        style.textContent = `
-            @keyframes bounceIn {
-                0%, 20%, 40%, 60%, 80%, 100% {
-                    transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-                }
-                0% {
-                    opacity: 0;
-                    transform: scale3d(.3, .3, .3);
-                }
-                20% {
-                    transform: scale3d(1.1, 1.1, 1.1);
-                }
-                40% {
-                    transform: scale3d(.9, .9, .9);
-                }
-                60% {
-                    opacity: 1;
-                    transform: scale3d(1.03, 1.03, 1.03);
-                }
-                80% {
-                    transform: scale3d(.97, .97, .97);
-                }
-                100% {
-                    opacity: 1;
-                    transform: scale3d(1, 1, 1);
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    console.log('✅ Smooth scroll initialized');
-}
-
 function initAllHeroEffects() {
     setTimeout(() => {
         initHeroParallax();
@@ -843,7 +873,11 @@ function initAllHeroEffects() {
 }
 
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initAllHeroEffects);
+    document.addEventListener('DOMContentLoaded', () => {
+        initApp();
+        initAllHeroEffects();
+    });
 } else {
+    initApp();
     initAllHeroEffects();
 }
