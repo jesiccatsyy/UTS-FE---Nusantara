@@ -1,26 +1,31 @@
+/* Reset semua elemen biar ga ada margin/padding default dari browser */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Biar perhitungan ukurannya lebih mudah */
 }
 
+/* Pengaturan dasar utk seluruh halaman */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #333;
-    background: linear-gradient(135deg, #f5f0e8 0%, #fdf8f0 100%);
+    background: linear-gradient(135deg, #f5f0e8 0%, #fdf8f0 100%); /* Gradasi bg biar halus */
 }
 
+/* Scroll halaman jadi smooth pas klik menu navigasi */
 html {
     scroll-behavior: smooth;
 }
 
+/* Container pembungkus agar konten ga terlalu lebar & tetap di tengah */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
+/* Bg header dgn warna coklat gradasi */
 .header-batik {
     background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #CD853F 100%);
     padding: 1rem 0;
@@ -31,12 +36,14 @@ html {
     border-bottom: 4px solid #DAA520;
 }
 
+/* Atur tata letak navbar: logo di kiri, menu di kanan */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+/* Style logo website */
 .logo {
     color: #FFD700;
     font-size: 1.8rem;
@@ -44,12 +51,14 @@ html {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+/* Menu navigasi diatur horizontal dgn jarak antar item */
 .nav-menu {
     display: flex;
     list-style: none;
     gap: 2rem;
 }
 
+/* Style utk setiap link menu */
 .nav-link {
     color: #FFF8DC;
     text-decoration: none;
@@ -59,6 +68,7 @@ html {
     transition: all 0.3s ease;
 }
 
+/* Efek saat menu di-hover atau aktif */
 .nav-link:hover,
 .nav-link.active {
     background: rgba(255, 255, 255, 0.2);
@@ -66,6 +76,7 @@ html {
     transform: translateY(-2px);
 }
 
+/* Bagian hero dgn gambar bg */
 .hero-section {
     background: url(images/bg.png) center/cover no-repeat;
     min-height: 500px;
@@ -77,6 +88,7 @@ html {
     border-bottom: 6px solid #CD853F;
 }
 
+/* Konten di dalam hero (judul, subtitle, tombol) */
 .hero-content {
     position: relative;
     z-index: 2;
@@ -84,6 +96,7 @@ html {
     padding: 2rem;
 }
 
+/* Judul besar di hero */
 .hero-title {
     font-size: 3.5rem;
     margin-bottom: 1rem;
@@ -91,12 +104,14 @@ html {
     color: #FFD700;
 }
 
+/* Subtitle di bawah judul hero */
 .hero-subtitle {
     font-size: 1.5rem;
     margin-bottom: 2rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+/* Tombol utama (call-to-action) */
 .btn-primary {
     background: linear-gradient(135deg, #DAA520 0%, #FFD700 100%);
     color: #5D4037;
@@ -110,15 +125,18 @@ html {
     box-shadow: 0 6px 20px rgba(218, 165, 32, 0.4);
 }
 
+/* Efek hover tombol utama - naik ke atas */
 .btn-primary:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(218, 165, 32, 0.6);
 }
 
+/* Section utk filter & koleksi pakaian adat */
 .filter-section {
     padding: 4rem 0;
 }
 
+/* Judul section (dipakai di bbrp bagian) */
 .section-title {
     text-align: center;
     font-size: 2.5rem;
@@ -128,6 +146,7 @@ html {
     padding-bottom: 1rem;
 }
 
+/* Garis dekoratif di bawah judul section */
 .section-title::after {
     content: '';
     position: absolute;
@@ -140,6 +159,7 @@ html {
     border-radius: 2px;
 }
 
+/* Container utk search box & tombol filter */
 .filter-container {
     background: white;
     padding: 2rem;
@@ -149,12 +169,14 @@ html {
     border: 2px solid #CD853F;
 }
 
+/* Kotak pencarian */
 .search-box {
     display: flex;
     gap: 1rem;
     margin-bottom: 2rem;
 }
 
+/* Input text utk pencarian */
 .search-input {
     flex: 1;
     padding: 1rem;
@@ -164,12 +186,14 @@ html {
     transition: all 0.3s ease;
 }
 
+/* Efek saat input pencarian diklik */
 .search-input:focus {
     outline: none;
     border-color: #DAA520;
     box-shadow: 0 0 10px rgba(218, 165, 32, 0.3);
 }
 
+/* Tombol pencarian */
 .btn-search {
     padding: 1rem 2rem;
     background: linear-gradient(135deg, #8B4513, #A0522D);
@@ -181,11 +205,13 @@ html {
     transition: all 0.3s ease;
 }
 
+/* Efek hover tombol pencarian */
 .btn-search:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(139, 69, 19, 0.4);
 }
 
+/* Container tombol-tombol filter */
 .filter-buttons {
     display: flex;
     flex-wrap: wrap;
@@ -195,6 +221,7 @@ html {
     margin: 0 auto;
 }
 
+/* Tombol filter kategori */
 .btn-filter {
     padding: 1rem 2.5rem;
     border: none;
@@ -209,18 +236,21 @@ html {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
+/* Efek hover tombol filter */
 .btn-filter:hover {
     background: #D0D0D0;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
+/* Tombol filter yg sedang aktif/dipilih */
 .btn-filter.active {
     background: linear-gradient(135deg, #2B5AA8, #4A7BC8);
     color: white;
     box-shadow: 0 4px 12px rgba(43, 90, 168, 0.3);
 }
 
+/* Grid utk menampilkan kartu-kartu pakaian adat */
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -228,6 +258,7 @@ html {
     margin-bottom: 2rem;
 }
 
+/* Style utk setiap kartu pakaian adat */
 .card {
     background: white;
     border-radius: 15px;
@@ -238,12 +269,14 @@ html {
     cursor: pointer;
 }
 
+/* Efek hover kartu - naik & border emas muncul */
 .card:hover {
     transform: translateY(-10px);
     box-shadow: 0 12px 30px rgba(139, 69, 19, 0.3);
     border-color: #DAA520;
 }
 
+/* Gambar di dalam kartu */
 .card-image {
     width: 100%;
     height: 250px;
@@ -251,16 +284,19 @@ html {
     border-bottom: 4px solid #CD853F;
 }
 
+/* Konten text di dalam kartu */
 .card-content {
     padding: 1.5rem;
 }
 
+/* Nama pakaian adat di kartu */
 .card-title {
     font-size: 1.4rem;
     color: #8B4513;
     margin-bottom: 0.5rem;
 }
 
+/* Nama provinsi di kartu */
 .card-provinsi {
     color: #A0522D;
     font-weight: 600;
@@ -268,17 +304,20 @@ html {
     font-size: 0.95rem;
 }
 
+/* Deskripsi singkat di kartu */
 .card-description {
     color: #666;
     line-height: 1.6;
     margin-bottom: 1rem;
 }
 
+/* Container utk tombol-tombol di kartu */
 .card-actions {
     display: flex;
     gap: 1rem;
 }
 
+/* Style dasar utk tombol detail & favorit */
 .btn-detail,
 .btn-favorit {
     flex: 1;
@@ -290,22 +329,26 @@ html {
     transition: all 0.3s ease;
 }
 
+/* Tombol lihat detail */
 .btn-detail {
     background: linear-gradient(135deg, #8B4513, #A0522D);
     color: white;
 }
 
+/* Efek hover tombol detail */
 .btn-detail:hover {
     transform: scale(1.05);
     box-shadow: 0 4px 12px rgba(139, 69, 19, 0.4);
 }
 
+/* Tombol favorit */
 .btn-favorit {
     background: white;
     color: #DC143C;
     border: 2px solid #DC143C;
 }
 
+/* Efek hover & saat favorit aktif */
 .btn-favorit:hover,
 .btn-favorit.active {
     background: #DC143C;
@@ -313,17 +356,20 @@ html {
     transform: scale(1.05);
 }
 
+/* Section utk menampilkan koleksi favorit */
 .favorit-section {
     padding: 4rem 0;
     background: linear-gradient(135deg, #FFF8DC 0%, #FAEBD7 100%);
 }
 
+/* Grid utk kartu-kartu favorit */
 .favorit-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 2rem;
 }
 
+/* Pesan saat belum ada favorit */
 .empty-message {
     text-align: center;
     color: #A0522D;
@@ -332,10 +378,12 @@ html {
     grid-column: 1 / -1;
 }
 
+/* Bagian ttg kami */
 .tentang-section {
     padding: 4rem 0;
 }
 
+/* Layout konten tentang: text di kiri, stats di kanan */
 .tentang-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -343,6 +391,7 @@ html {
     align-items: center;
 }
 
+/* Box text penjelasan */
 .tentang-text {
     background: white;
     padding: 2rem;
@@ -357,12 +406,14 @@ html {
     line-height: 1.8;
 }
 
+/* Grid utk 3 box statistik */
 .tentang-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
 }
 
+/* Box utk setiap item statistik */
 .stat-item {
     background: linear-gradient(135deg, #8B4513, #A0522D);
     padding: 2rem;
@@ -372,22 +423,26 @@ html {
     box-shadow: 0 6px 20px rgba(139, 69, 19, 0.3);
 }
 
+/* Angka besar di stat item */
 .stat-item h3 {
     font-size: 3rem;
-    color: #FFD700;
+    color: #FFD700; 
     margin-bottom: 0.5rem;
 }
 
+/* Bagian kotak */
 .kontak-section {
     padding: 4rem 0;
     background: linear-gradient(135deg, #FFF8DC 0%, #FAEBD7 100%);
 }
 
+/* Container kontak di tengah */
 .kontak-content-single {
     display: flex;
     justify-content: center;
 }
 
+/* Box kontak */
 .kontak-box {
     background: white;
     padding: 3rem;
@@ -398,6 +453,7 @@ html {
     width: 100%;
 }
 
+/* Judul kontak */
 .kontak-title {
     color: #8B4513;
     font-size: 2rem;
@@ -407,6 +463,7 @@ html {
     padding-bottom: 1rem;
 }
 
+/* Garis dekoratif bawah judul kontak */
 .kontak-title::after {
     content: '';
     position: absolute;
@@ -419,6 +476,7 @@ html {
     border-radius: 2px;
 }
 
+/* Subtitle kontak */
 .kontak-subtitle {
     color: #5D4037;
     margin-bottom: 2.5rem;
@@ -427,6 +485,7 @@ html {
     font-size: 0.95rem;
 }
 
+/* Container detail kontak */
 .kontak-detail {
     display: flex;
     flex-direction: column;
@@ -436,12 +495,14 @@ html {
     border-bottom: 2px solid #FAEBD7;
 }
 
+/* Setiap item kontak */
 .kontak-item {
     display: flex;
     align-items: flex-start;
     gap: 1rem;
 }
 
+/* Icon di setiap item kontak */
 .kontak-icon {
     font-size: 2rem;
     min-width: 50px;
@@ -462,6 +523,7 @@ html {
     color: #666;
 }
 
+/* Bagian sosial media di kontak */
 .social-media-inline {
     text-align: center;
 }
@@ -478,12 +540,14 @@ html {
     font-size: 0.95rem;
 }
 
+/* Container link sosmed */
 .social-links {
     display: flex;
     gap: 1.5rem;
     justify-content: center;
 }
 
+/* Style utk setiap link sosmed */
 .social-link {
     display: flex;
     align-items: center;
@@ -499,17 +563,15 @@ html {
     height: 24px;
 }
 
+/* Efek hover link sosmed - jadi lebih jelas */
 .social-link:hover {
     opacity: 1;
     transform: scale(1.15);
 }
 
+/* Warna khusus utk setiap platform saat hover */
 .social-link.instagram:hover {
     color: #E1306C;
-}
-
-.social-link.facebook:hover {
-    color: #1877F2;
 }
 
 .social-link.youtube:hover {
@@ -520,16 +582,7 @@ html {
     color: #EA4335;
 }
 
-@media (max-width: 768px) {
-    .kontak-box {
-        padding: 2rem;
-    }
-    
-    .kontak-title {
-        font-size: 1.6rem;
-    }
-}
-
+/* Overlay modal yg menutupi seluruh halaman */
 .modal {
     display: none;
     position: fixed;
@@ -543,11 +596,13 @@ html {
     overflow-y: auto;
 }
 
+/* Animasi fade in saat modal muncul */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
+/* CContainer konten modal */
 .modal-content {
     background: white;
     margin: 3% auto;
@@ -558,6 +613,7 @@ html {
     border: 4px solid #DAA520;
 }
 
+/* Animasi slide down saat modal muncul */
 @keyframes slideDown {
     from {
         transform: translateY(-50px);
@@ -569,6 +625,7 @@ html {
     }
 }
 
+/* Tombol X utk close */
 .close-modal {
     position: absolute;
     right: 15px;
@@ -591,16 +648,21 @@ html {
     padding: 0;
 }
 
+/* Efek hover tombol close - jadi merah & berputar */
 .close-modal:hover {
     background: #DC143C;
-    transform: rotate(90deg);
+    color: white;
+    border-color: #DC143C;
+    transform: rotate(90deg) scale(1.1);
 }
 
+/* Layout modal */
 .modal-body {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
 
+/* Gambar di modal */
 .modal-image {
     width: 100%;
     height: 100%;
@@ -608,57 +670,7 @@ html {
     min-height: 400px;
 }
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    animation: fadeIn 0.3s ease;
-    overflow-y: auto;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.modal-content {
-    background: white;
-    margin: 3% auto;
-    max-width: 900px;
-    border-radius: 20px;
-    overflow: hidden;
-    animation: slideDown 0.3s ease;
-    border: 4px solid #DAA520;
-}
-
-@keyframes slideDown {
-    from {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.modal-body {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-.modal-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    min-height: 400px;
-}
-
+/* Info detail di modal */
 .modal-info {
     padding: 3rem;
     display: flex;
@@ -669,39 +681,14 @@ html {
     position: relative;
 }
 
-.close-modal {
-    position: absolute;
-    right: 15px;
-    top: 20px;
-    font-size: 1.8rem;
-    color: #8B4513;
-    cursor: pointer;
-    background: white;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    z-index: 10;
-    border: 2px solid #CD853F;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.close-modal:hover {
-    background: #DC143C;
-    color: white;
-    border-color: #DC143C;
-    transform: rotate(90deg) scale(1.1);
-}
-
+/* Nama pakaian adat di modal */
 .modal-info h2 {
     color: #8B4513;
     margin-bottom: 1rem;
     font-size: 2rem;
 }
 
+/* Provinsi di modal */
 .modal-provinsi {
     color: #A0522D;
     font-weight: 600;
@@ -709,12 +696,14 @@ html {
     font-size: 1.1rem;
 }
 
+/* Deskripsi di modal */
 .modal-deskripsi {
     color: #5D4037;
     line-height: 1.8;
     margin-bottom: 1.5rem;
 }
 
+/* Box filosofi di modal */
 .modal-filosofi {
     background: linear-gradient(135deg, #FFF8DC 0%, #FAEBD7 100%);
     padding: 1.5rem;
@@ -735,6 +724,7 @@ html {
     margin: 0;
 }
 
+/* Tombol favorit di modal */
 .btn-favorit-modal {
     padding: 1rem;
     background: #DC143C;
@@ -747,6 +737,7 @@ html {
     transition: all 0.3s ease;
 }
 
+/* Efek hover tombol favorit modal */
 .btn-favorit-modal:hover {
     background: #B22222;
     transform: scale(1.05);
@@ -764,6 +755,7 @@ html {
     font-size: 1.1rem;
 }
 
+/* Grid galeri - otomatis sesuaikan kolom */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -771,6 +763,7 @@ html {
     margin-bottom: 3rem;
 }
 
+/* Item gambar di galeri */
 .gallery-item {
     position: relative;
     border-radius: 15px;
@@ -781,6 +774,7 @@ html {
     transition: all 0.3s ease;
 }
 
+/* Efek hover item galeri */
 .gallery-item:hover {
     transform: translateY(-10px);
     box-shadow: 0 8px 25px rgba(139, 69, 19, 0.3);
@@ -793,10 +787,12 @@ html {
     transition: transform 0.3s ease;
 }
 
+/* Gambar zoom saat hover */
 .gallery-item:hover img {
     transform: scale(1.1);
 }
 
+/* Overlay info yg muncul saat hover */
 .gallery-overlay {
     position: absolute;
     bottom: 0;
@@ -808,6 +804,7 @@ html {
     transition: transform 0.3s ease;
 }
 
+/* Overlay muncul dari bawah saat hover */
 .gallery-item:hover .gallery-overlay {
     transform: translateY(0);
 }
@@ -823,10 +820,12 @@ html {
     font-size: 0.9rem;
 }
 
+/* Call to action di galeri */
 .gallery-cta {
     text-align: center;
 }
 
+/* Tombol galeri */
 .btn-gallery {
     display: inline-block;
     padding: 1rem 2.5rem;
@@ -844,18 +843,7 @@ html {
     box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
 }
 
-@media (max-width: 768px) {
-    .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 480px) {
-    .gallery-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
+/* Footer dgn warna gelap */
 .footer-batik {
     background: linear-gradient(135deg, #3d4f5c 0%, #2c3e50 100%);
     color: #e0e0e0;
@@ -863,6 +851,7 @@ html {
     border-top: 4px solid #DAA520;
 }
 
+/* Layout footer */
 .footer-grid {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1.5fr;
@@ -877,6 +866,7 @@ html {
     margin-bottom: 1.5rem;
 }
 
+/* Brand/Logo di footer */
 .footer-brand {
     color: #FFD700;
     font-size: 1.8rem;
@@ -884,6 +874,7 @@ html {
     margin-bottom: 1rem;
 }
 
+/* Deskripsi footer */
 .footer-desc {
     color: #b0b0b0;
     line-height: 1.8;
@@ -891,11 +882,13 @@ html {
     font-size: 0.95rem;
 }
 
+/* Container icon sosmed di footer */
 .footer-social {
     display: flex;
     gap: 1rem;
 }
 
+/* Link icon sosmed di footer */
 .footer-social-link {
     display: flex;
     align-items: center;
@@ -908,12 +901,14 @@ html {
     transition: all 0.3s ease;
 }
 
+/* Efek hover icon sosmed */
 .footer-social-link:hover {
     background: #DAA520;
     color: white;
     transform: translateY(-3px);
 }
 
+/* Judul utk setiap kolom footer */
 .footer-title {
     color: #FFD700;
     font-size: 1.2rem;
@@ -921,6 +916,7 @@ html {
     margin-bottom: 1.5rem;
 }
 
+/* List link di footer */
 .footer-links {
     list-style: none;
 }
@@ -929,6 +925,7 @@ html {
     margin-bottom: 0.8rem;
 }
 
+/* Link di footer */
 .footer-links a {
     color: #b0b0b0;
     text-decoration: none;
@@ -936,15 +933,18 @@ html {
     font-size: 0.95rem;
 }
 
+/* Efek hover link footer */
 .footer-links a:hover {
     color: #FFD700;
     padding-left: 5px;
 }
 
+/* List kontak di footer */
 .footer-contact {
     list-style: none;
 }
 
+/* Item kontak di footer */
 .footer-contact li {
     display: flex;
     align-items: flex-start;
@@ -959,6 +959,7 @@ html {
     font-size: 1.2rem;
 }
 
+/* Copyright di bagian paling bawah footer */
 .footer-bottom {
     text-align: center;
     padding-top: 1.5rem;
@@ -966,38 +967,48 @@ html {
     font-size: 0.9rem;
 }
 
+/* Utk layar tablet & ke bawah (max 968px) */
 @media (max-width: 968px) {
+    /* Footer jadi 2 kolom */
     .footer-grid {
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
     }
 }
 
+/* Utk layar lebih kecil (max 568px) */
 @media (max-width: 568px) {
+    /* Footer jadi 1 kolom (vertical) */
     .footer-grid {
         grid-template-columns: 1fr;
         gap: 2.5rem;
     }
     
+    /* Konten footer jadi rata tengah */
     .footer-col {
         text-align: center;
     }
     
+    /* Icon sosmed di tengah */
     .footer-social {
         justify-content: center;
     }
     
+    /* Item kontak di tengah */
     .footer-contact li {
         justify-content: center;
     }
 }
 
+/* Utk layar tablet ke bawah (max 768px) */
 @media (max-width: 768px) {
+    /* Menu navigasi jadi vertical */
     .nav-menu {
         flex-direction: column;
         gap: 0.5rem;
     }
 
+    /* Ukuran hero lebih kecil */
     .hero-title {
         font-size: 2rem;
     }
@@ -1006,81 +1017,133 @@ html {
         font-size: 1.2rem;
     }
 
+    /* Card jadi 1 kolom */
     .card-grid,
     .favorit-grid {
         grid-template-columns: 1fr;
     }
 
+    /* Konten tentang jadi 1 kolom (vertical) */
     .tentang-content {
         grid-template-columns: 1fr;
     }
 
+    /* Stat jadi 1 kolom */
     .tentang-stats {
         grid-template-columns: 1fr;
     }
 
+    /* Modal jadi 1 kolom (gambar di atas, info di bawah) */
     .modal-body {
         grid-template-columns: 1fr;
     }
 
+    /* Gambar modal lebih pendek */
     .modal-image {
         height: 300px;
         min-height: 300px;
     }
 
+    /* Info modal ga ada max height (bisa scroll penuh) */
     .modal-info {
         max-height: none;
     }
 
+    /* Tombol filter jadi vertical */
     .filter-buttons {
         flex-direction: column;
     }
 
+    /* Search box jadi vertical */
     .search-box {
         flex-direction: column;
     }
     
+    /* Kontak jadi 1 kolom */
     .kontak-content {
         grid-template-columns: 1fr;
     }
     
+    /* Footer jadi vertical */
     .footer-content {
         flex-direction: column;
         gap: 2rem;
         text-align: center;
     }
     
+    /* Link footer jadi vertical */
     .footer-links {
         flex-direction: column;
         gap: 1rem;
     }
 }
 
+/* Utk layar HP kecil (max 480px) */
 @media (max-width: 480px) {
+    /* Logo lebih kecil */
     .logo {
         font-size: 1.3rem;
     }
 
+    /* Hero title lebih kecil */
     .hero-title {
         font-size: 1.5rem;
     }
 
+    /* Section title lebih kecil */
     .section-title {
         font-size: 1.8rem;
     }
 
+    /* Tombol primary lebih kecil */
     .btn-primary {
         padding: 0.8rem 1.5rem;
         font-size: 1rem;
     }
     
+    /* Icon sosmed lebih kecil */
     .social-link svg {
         width: 20px;
         height: 20px;
     }
 
+    /* Tombol filter lebih kecil */
     .btn-filter {
         padding: 0.8rem 1.5rem;
         font-size: 0.95rem;
     }
+}
+
+/* Galeri utk tablet */
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Galeri utk HP kecil */
+@media (max-width: 480px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Responsive utk kontak box */
+@media (max-width: 768px) {
+    .kontak-box {
+        padding: 2rem;
+    }
+    
+    .kontak-title {
+        font-size: 1.6rem;
+    }
+}
+
+/* Class utk hide element (digunakan via JavaScript) */
+.no-result {
+    text-align: center;
+    padding: 3rem;
+    color: #A0522D;
+    font-size: 1.2rem;
+    font-style: italic;
 }
