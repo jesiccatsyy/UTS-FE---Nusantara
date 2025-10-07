@@ -67,8 +67,7 @@ html {
 }
 
 .hero-section {
-    background: linear-gradient(rgba(139, 69, 19, 0.7), rgba(160, 82, 45, 0.7)),
-                url('https://images.unsplash.com/photo-1555400082-8bed3f2c5b0e?w=1600&h=800&fit=crop') center/cover;
+    background: url(images/bg.png) center/cover no-repeat;
     min-height: 500px;
     display: flex;
     align-items: center;
