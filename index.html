@@ -4,15 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pakaian Adat Indonesia Timur - Warisan Nusantara</title>
+    <!-- Link utk ke file CSS utama -->
     <link rel="stylesheet" href="style.css">
+    <!-- Link utk ke Font Awesome utk icon-icon sosmed -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
+    <!-- Bagian header / navigasi -->
     <header class="header-batik">
         <div class="container">
             <nav class="navbar">
+                <!-- Logo website -->
                 <h1 class="logo">🌺 EastHeritage</h1>
+                <!-- Menu navigasi utk berpindah ke halaman lain -->
                 <ul class="nav-menu">
                     <li><a href="#beranda" class="nav-link active">Beranda</a></li>
                     <li><a href="#koleksi" class="nav-link">Koleksi</a></li>
@@ -23,26 +28,32 @@
         </div>
     </header>
 
+    <!-- Bagian Hero / banner utama -->
     <section id="beranda" class="hero-section">
+        <!-- Overlay adalah lapisan gelap di atas gambar background agar teks lebih mudah dibaca -->
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="hero-title">Pakaian Adat Indonesia Timur</h1>
             <p class="hero-subtitle">Jelajahi Keindahan Warisan Budaya Nusantara</p>
+            <!-- Tombol utk mulai menjelajah, nanti akan dikasih fungsi pakai JavaScript -->
             <button class="btn-primary" id="mulaiJelajah">Mulai Menjelajah</button>
         </div>
     </section>
 
+    <!-- Bagian Koleksi Pakaian Adat -->
     <section id="koleksi" class="filter-section">
         <div class="container">
             <h2 class="section-title">Koleksi Pakaian Adat</h2>
             
             <div class="filter-container">
 
+                <!-- Kotak pencarian utk mencari pakaian adat berdasarkan nama -->
                 <div class="search-box">
                     <input type="text" id="searchInput" placeholder="Cari pakaian adat..." class="search-input">
                     <button id="searchBtn" class="btn-search">🔍 Cari</button>
                 </div>
 
+                <!-- Tombol-tombol filter utk menyaring pakaian adat berdasarkan daerah -->
                 <div class="filter-buttons">
                     <button class="btn-filter active" data-filter="semua">Semua</button>
                     <button class="btn-filter" data-filter="sulawesi">Sulawesi</button>
@@ -54,31 +65,39 @@
                 </div>
             </div>
 
+            <!-- Tempat munculnya kartu-kartu pakaian adat, diisi pakai JavaScript -->
             <div class="card-grid" id="cardGrid"></div>
 
+            <!-- Pesan ini muncul kalau hasil pencarian tidak ketemu -->
             <div id="noResult" class="no-result" style="display: none;">
                 <p>Tidak ada hasil yang ditemukan</p>
             </div>
         </div>
     </section>
 
+    <!-- Bagian Koleksi Favorit -->
     <section class="favorit-section">
         <div class="container">
             <h2 class="section-title">Koleksi Favorit Saya</h2>
+            <!-- Tempat munculnya kartu-kartu favorit, diisi pakai JavaScript -->
             <div class="favorit-grid" id="favoritGrid">
+                <!-- Pesan ini muncul kalau belum ada favorit -->
                 <p class="empty-message">Belum ada pakaian adat yang ditandai sebagai favorit</p>
             </div>
         </div>
     </section>
 
+    <!-- Bagian tentang / informasi -->
     <section id="tentang" class="tentang-section">
         <div class="container">
             <h2 class="section-title">Tentang Indonesia Timur</h2>
             <div class="tentang-content">
+                <!-- Teks penjelasan -->
                 <div class="tentang-text">
                     <p>Indonesia Timur kaya akan keberagaman budaya dan tradisi. Setiap daerah punya pakaian adat dengan makna dan filosofi sendiri.</p>
                     <p>Pakaian adat bukan cuma busana, tapi juga simbol identitas dan nilai-nilai leluhur yang diwariskan dari generasi ke generasi.</p>
                 </div>
+                <!-- Statistik dalam bentuk angka -->
                 <div class="tentang-stats">
                     <div class="stat-item">
                         <h3 id="totalPakaian">29</h3>
@@ -89,6 +108,7 @@
                         <p>Provinsi</p>
                     </div>
                     <div class="stat-item">
+                        <!-- Angka ini akan berubah sesuai jumlah favorit yang dipilih user -->
                         <h3 id="totalFavorit">0</h3>
                         <p>Favorit</p>
                     </div>
@@ -97,12 +117,15 @@
         </div>
     </section>
 
+    <!-- Bagian Footer -->
     <footer id="footer" class="footer-batik">
         <div class="container">
             <div class="footer-grid">
+                <!-- Kolom 1: Brand dan sosmed -->
                 <div class="footer-col">
                     <h2 class="footer-brand">🌺 EastHeritage</h2>
                     <p class="footer-desc">Portal informasi lengkap tentang kekayaan pakaian adat Indonesia Timur. Melestarikan warisan budaya untuk generasi mendatang.</p>
+                    <!-- Link-link ke sosmed -->
                     <div class="footer-social">
                         <a href="https://instagram.com/jesiccatsyy" target="_blank" class="footer-social-link" title="Instagram">
                             <i class="fa-brands fa-instagram"></i>
@@ -116,6 +139,7 @@
                     </div>
                 </div>
 
+                <!-- Kolom 2: Link kategori daerah -->
                 <div class="footer-col">
                     <h3 class="footer-title">Kategori</h3>
                     <ul class="footer-links">
@@ -128,6 +152,7 @@
                     </ul>
                 </div>
 
+                <!-- Kolom 3: Link navigasi umum -->
                 <div class="footer-col">
                     <h3 class="footer-title">Tentang</h3>
                     <ul class="footer-links">
@@ -138,6 +163,7 @@
                     </ul>
                 </div>
 
+                <!-- Kolom 4: Informasi kontak -->
                 <div class="footer-col">
                     <h3 class="footer-title">Kontak</h3>
                     <ul class="footer-contact">
@@ -157,31 +183,42 @@
                 </div>
             </div>
 
+            <!-- Copyright di bagian paling bawah -->
             <div class="footer-bottom">
                 <p>&copy; 2025 EastHeritage. All rights reserved. Made with ❤️ for Indonesian culture.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Modal / pop-up detail -->
     <div id="detailModal" class="modal">
         <div class="modal-content">
             <div class="modal-body">
+                <!-- Gambar pakaian adat dalam modal -->
                 <img id="modalImage" src="" alt="" class="modal-image">
+                <!-- Info detail pakaian adat -->
                 <div class="modal-info">
+                    <!-- Tombol X utk menutup modal -->
                     <span class="close-modal">X</span>
+                    <!-- Nama pakaian adat -->
                     <h2 id="modalNama"></h2>
+                    <!-- Asal provinsi -->
                     <p class="modal-provinsi" id="modalProvinsi"></p>
+                    <!-- Deskripsi lengkap -->
                     <p class="modal-deskripsi" id="modalDeskripsi"></p>
+                    <!-- Bagian filosofi dan makna -->
                     <div class="modal-filosofi">
                         <h4>💫 Makna & Filosofi</h4>
                         <p id="modalFilosofi"></p>
                     </div>
+                    <!-- Tombol utk menambahkan ke favorit -->
                     <button id="modalFavoritBtn" class="btn-favorit-modal">❤️ Tambah ke Favorit</button>
                 </div>
             </div>
         </div>
     </div>
     
+    <!-- Link ke file JavaScript yang mengatur semua fungsi interaktif website -->
     <script src="script.js"></script>
 </body>
 </html>
