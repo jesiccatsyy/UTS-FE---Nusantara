@@ -1,3 +1,5 @@
+// Data lengkap pakaian adat dari Indonesia bagian Timur
+// Berisi informasi nama, asal daerah, deskripsi, filosofi, & gambar
 const pakaianAdatData = [
     {
         id: 1,
@@ -262,34 +264,45 @@ const pakaianAdatData = [
     }
 ];
 
+// Array utk menyimpan item favorit yg dipilih user
 let favoritItems = [];
+
+// Array utk menyimpan data yg sudah difilter berdasarkan kategori/pencarian
 let filteredData = [...pakaianAdatData];
+
+// Menyimpan kategori filter yg sedang aktif
 let currentFilter = 'semua';
 
-const cardGrid = document.getElementById('cardGrid');
-const favoritGrid = document.getElementById('favoritGrid');
-const searchInput = document.getElementById('searchInput');
-const searchBtn = document.getElementById('searchBtn');
-const filterButtons = document.querySelectorAll('.btn-filter');
-const modal = document.getElementById('detailModal');
-const closeModal = document.querySelector('.close-modal');
-const totalFavoritSpan = document.getElementById('totalFavorit');
-const totalPakaianSpan = document.getElementById('totalPakaian');
+// Mengambil elemen-elemen HTML yg akan digunakan
+const cardGrid = document.getElementById('cardGrid'); // Container utk card koleksi
+const favoritGrid = document.getElementById('favoritGrid'); // Container utk card favorit
+const searchInput = document.getElementById('searchInput'); // Input pencarian
+const searchBtn = document.getElementById('searchBtn'); // Tombol pencarian
+const filterButtons = document.querySelectorAll('.btn-filter'); // Semua tombol filter
+const modal = document.getElementById('detailModal'); // Modal pop-up detail
+const closeModal = document.querySelector('.close-modal'); // Tombol tutup modal
+const totalFavoritSpan = document.getElementById('totalFavorit'); // Counter jumlah favorit
+const totalPakaianSpan = document.getElementById('totalPakaian'); // Counter total pakaian
 
+// Fungsi utk menampilkan card pakaian adat ke dalam grid
 function renderCards(data) {
     cardGrid.innerHTML = '';
     const noResult = document.getElementById('noResult');
     
+    // kalau data nya a ada, tampilkan pesan "tidak ditemukan"
     if (data.length === 0) {
         noResult.style.display = 'block';
         return;
     }
     
-    noResult.style.display = 'none';
+    noResult.style.display = 'none'; // Sembunyikan pesan kalau data nya ada
     
+    // Loop setiap item data utk membuat card
     data.forEach(item => {
+        // Cek apakah item ini sudah ada di favorit
         const isFavorit = favoritItems.some(fav => fav.id === item.id);
         
+        // Buat elemen card baru
         const card = document.createElement('div');
         card.className = 'card';
         card.innerHTML = `
@@ -299,28 +312,31 @@ function renderCards(data) {
                 <p class="card-provinsi">📍 ${item.origin}</p>
                 <p class="card-description">${item.description.substring(0, 100)}...</p>
                 <div class="card-actions">
-                    <button class="btn-detail" data-id="${item.id}">👁️ Detail</button>
+                    <button class="btn-detail" data-id="${item.id}">👁 Detail</button>
                     <button class="btn-favorit ${isFavorit ? 'active' : ''}" data-id="${item.id}">
-                        ${isFavorit ? '❤️ Favorit' : '🤍 Favorit'}
+                        ${isFavorit ? '❤ Favorit' : '🤍 Favorit'}
                     </button>
                 </div>
             </div>
         `;
         
-        cardGrid.appendChild(card);
+        cardGrid.appendChild(card); // Tambahkan card ke grid
     });
     
-    attachCardEvents();
+    attachCardEvents(); // Pasang event listener ke semua card
 }
 
+// Fungsi utk menampilkan card favorit
 function renderFavorit() {
+    // kalau ga ada favorit, tampilkan pesan kosong
     if (favoritItems.length === 0) {
         favoritGrid.innerHTML = '<p class="empty-message">Belum ada pakaian adat yang ditandai sebagai favorit</p>';
         return;
     }
     
-    favoritGrid.innerHTML = '';
+    favoritGrid.innerHTML = ''; // Kosongkan grid favorit
     
+    // Loop setiap item favorit utk membuat card
     favoritItems.forEach(item => {
         const card = document.createElement('div');
         card.className = 'card';
@@ -331,104 +347,125 @@ function renderFavorit() {
                 <p class="card-provinsi">📍 ${item.origin}</p>
                 <p class="card-description">${item.description.substring(0, 100)}...</p>
                 <div class="card-actions">
-                    <button class="btn-detail" data-id="${item.id}">👁️ Detail</button>
-                    <button class="btn-favorit active" data-id="${item.id}">❤️ Hapus</button>
+                    <button class="btn-detail" data-id="${item.id}">👁 Detail</button>
+                    <button class="btn-favorit active" data-id="${item.id}">❤ Hapus</button>
                 </div>
             </div>
         `;
         
-        favoritGrid.appendChild(card);
+        favoritGrid.appendChild(card); // Tambahkan card ke grid favorit
     });
     
-    attachCardEvents();
-    updateFavoritCounter();
+    attachCardEvents(); // Pasang event listener
+    updateFavoritCounter(); // Update angka counter favorit
 }
 
+// Fungsi utk mengupdate angka counter jumlah favorit
 function updateFavoritCounter() {
     totalFavoritSpan.textContent = favoritItems.length;
 }
 
+// Fungsi utk mengupdate angka total pakaian adat
 function updateTotalPakaian() {
     totalPakaianSpan.textContent = pakaianAdatData.length;
 }
 
+// Fungsi utk memasang event listener ke tombol-tombol di card
 function attachCardEvents() {
+    // Event utk tombol "Detail" - menampilkan modal
     const detailButtons = document.querySelectorAll('.btn-detail');
     detailButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            e.stopPropagation();
+            e.stopPropagation(); // Utk mencegah event bubbling
             const id = parseInt(btn.dataset.id);
-            showModal(id);
+            showModal(id); // Tampilkan modal dgn id tersebut
         });
     });
     
+    // Event utk tombol "Favorit" - toggle favorit
     const favoritButtons = document.querySelectorAll('.btn-favorit');
     favoritButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            e.stopPropagation();
+            e.stopPropagation(); // Utk mencegah event bubbling
             const id = parseInt(btn.dataset.id);
-            toggleFavorit(id);
+            toggleFavorit(id); // Toggle status favorit
         });
     });
     
+    // Event utk klik di area card (selain tombol) - buka modal
     const cards = document.querySelectorAll('.card');
     cards.forEach(card => {
         const detailBtn = card.querySelector('.btn-detail');
         const id = parseInt(detailBtn.dataset.id);
         
         card.addEventListener('click', () => {
-            showModal(id);
+            showModal(id); // Tampilkan modal
         });
     });
 }
 
+// Fungsi utk menambah/menghapus item dari favorit
 function toggleFavorit(id) {
+    // Cari data pakaian berdasarkan id
     const item = pakaianAdatData.find(p => p.id === id);
+    // Cek apakah sudah ada di array favorit
     const index = favoritItems.findIndex(f => f.id === id);
     
     if (index === -1) {
+        // Kalau ga ada, tambahkan ke favorit
         favoritItems.push(item);
         showNotification(`${item.name} ditambahkan ke favorit!`);
     } else {
+        // Kalau ada, hapus dari favorit
         favoritItems.splice(index, 1);
         showNotification(`${item.name} dihapus dari favorit`);
     }
     
+    // Render ulang tampilan
     renderCards(filteredData);
     renderFavorit();
 }
 
+// Fungsi utk menampilkan modal detail pakaian adat
 function showModal(id) {
+    // Cari data berdasarkan id
     const item = pakaianAdatData.find(p => p.id === id);
+    // Cek status favorit
     const isFavorit = favoritItems.some(fav => fav.id === item.id);
     
+    // Isi konten modal dgn data item
     document.getElementById('modalImage').src = item.image;
     document.getElementById('modalNama').textContent = item.name;
     document.getElementById('modalProvinsi').textContent = `📍 ${item.origin}`;
     document.getElementById('modalDeskripsi').textContent = item.description;
     document.getElementById('modalFilosofi').textContent = item.philosophy;
     
+    // Atur tombol favorit di modal
     const modalFavBtn = document.getElementById('modalFavoritBtn');
-    modalFavBtn.textContent = isFavorit ? '❤️ Hapus dari Favorit' : '🤍 Tambah ke Favorit';
+    modalFavBtn.textContent = isFavorit ? '❤ Hapus dari Favorit' : '🤍 Tambah ke Favorit';
     modalFavBtn.onclick = () => {
         toggleFavorit(id);
-        showModal(id);
+        showModal(id); // Refresh modal setelah toggle
     };
     
+    // Tampilkan modal & cegah scroll body
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
 }
 
+// Fungsi utk menutup modal
 function closeModalFunc() {
     modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = 'auto'; // Kembalikan scroll
 }
 
+// Fungsi utk filter pakaian berdasarkan provinsi/kategori
 function filterByProvinsi(filterValue) {
-    currentFilter = filterValue;
+    currentFilter = filterValue; // Simpan filter yg aktif
     
+    // Filter data berdasarkan nilai yg dipilih
     if (filterValue === 'semua') {
-        filteredData = [...pakaianAdatData];
+        filteredData = [...pakaianAdatData]; // Tampilkan semua
     } else if (filterValue === 'sulawesi') {
         filteredData = pakaianAdatData.filter(item => item.category === 'Sulawesi');
     } else if (filterValue === 'gorontalo') {
@@ -443,13 +480,15 @@ function filterByProvinsi(filterValue) {
         filteredData = pakaianAdatData.filter(item => item.category === 'Papua');
     }
     
-    renderCards(filteredData);
+    renderCards(filteredData); // Tampilkan hasil filter
 }
 
+// Fungsi utk mencari pakaian adat berdasarkan keyword
 function searchPakaian() {
-    const keyword = searchInput.value.toLowerCase().trim();
+    const keyword = searchInput.value.toLowerCase().trim(); // Ambil keyword & ubah ke huruf kecil
     
     if (keyword === '') {
+        // Kalau kosong, kembalikan ke filter sebelumnya
         if (currentFilter === 'semua') {
             filteredData = [...pakaianAdatData];
         } else {
@@ -457,7 +496,7 @@ function searchPakaian() {
             return;
         }
     } else {
-        // Filter berdasarkan keyword - lebih fokus ke origin (provinsi)
+        // Cari berdasarkan nama, provinsi, kategori, atau deskripsi
         filteredData = pakaianAdatData.filter(item => 
             item.name.toLowerCase().includes(keyword) ||
             item.origin.toLowerCase().includes(keyword) ||
@@ -465,7 +504,7 @@ function searchPakaian() {
             item.description.toLowerCase().includes(keyword)
         );
         
-        // Jika ada hasil, reset filter ke "Semua"
+        // Kalau ada hasil, reset filter ke "Semua"
         if (filteredData.length > 0) {
             filterButtons.forEach(btn => {
                 btn.classList.remove('active');
@@ -477,9 +516,9 @@ function searchPakaian() {
         }
     }
     
-    renderCards(filteredData);
+    renderCards(filteredData); // Tampilkan hasil pencarian
     
-    // Scroll ke hasil pencarian (card grid)
+    // Auto-scroll ke hasil pencarian
     if (keyword !== '') {
         setTimeout(() => {
             const cardGrid = document.getElementById('cardGrid');
@@ -499,6 +538,7 @@ function searchPakaian() {
     }
 }
 
+// Fungsi utk menampilkan notifikasi pop-up
 function showNotification(message) {
     const notification = document.createElement('div');
     notification.style.cssText = `
@@ -518,53 +558,63 @@ function showNotification(message) {
     notification.textContent = message;
     document.body.appendChild(notification);
     
+    // Hapus notifikasi setelah 2.5 detik
     setTimeout(() => {
         notification.style.animation = 'slideOut 0.3s ease';
         setTimeout(() => notification.remove(), 300);
     }, 2500);
 }
 
-// Event Listeners
+// Event utk tombol filter (Semua, Sulawesi, Gorontalo, dll)
 filterButtons.forEach(btn => {
     btn.addEventListener('click', () => {
+        // Hapus class 'active' dari semua tombol
         filterButtons.forEach(b => b.classList.remove('active'));
+        // Tambah class 'active' ke tombol yg diklik
         btn.classList.add('active');
         
+        // Jalankan filter berdasarkan data-filter tombol
         const filter = btn.dataset.filter;
         filterByProvinsi(filter);
-        searchInput.value = '';
+        searchInput.value = ''; // Kosongkan input pencarian
     });
 });
 
+// Event utk tombol search
 searchBtn.addEventListener('click', searchPakaian);
 
+// Event utk tekan Enter di input search
 searchInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         searchPakaian();
     }
 });
 
+// Event utk menghapus pencarian saat input kosong
 searchInput.addEventListener('input', () => {
     if (searchInput.value === '') {
         searchPakaian();
     }
 });
 
+// Event utk tombol close modal
 closeModal.addEventListener('click', closeModalFunc);
 
+// Event utk klik di luar modal
 modal.addEventListener('click', (e) => {
     if (e.target === modal) {
         closeModalFunc();
     }
 });
 
+// Event utk tekan tombol Escape utk tutup modal
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.style.display === 'block') {
         closeModalFunc();
     }
 });
 
-// SMOOTH SCROLL - Tombol "Mulai Menjelajah"
+// Smooth scroll saat pencet "Mulai Menjelajah"
 function initSmoothScroll() {
     const btn = document.getElementById('mulaiJelajah');
     if (!btn) return;
@@ -572,6 +622,7 @@ function initSmoothScroll() {
     btn.addEventListener('click', (e) => {
         e.preventDefault();
         
+        // Scroll ke section koleksi dgn animasi smooth
         const koleksiSection = document.getElementById('koleksi');
         if (koleksiSection) {
             const headerHeight = document.querySelector('.header-batik')?.offsetHeight || 0;
@@ -584,7 +635,7 @@ function initSmoothScroll() {
                 behavior: 'smooth'
             });
             
-            // Animasi bounce pada judul section
+            // Tambahkan animasi bounce pd judul section
             const sectionTitle = koleksiSection.querySelector('.section-title');
             if (sectionTitle) {
                 sectionTitle.style.animation = 'none';
@@ -598,7 +649,7 @@ function initSmoothScroll() {
     console.log('✅ Smooth scroll initialized');
 }
 
-// Navigation links smooth scroll
+// Smooth scroll utk link navigasi (Beranda, Koleksi, Favorit)
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -617,17 +668,21 @@ document.querySelectorAll('.nav-link').forEach(link => {
             });
         }
         
+        // Update active state link navigasi
         document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
         link.classList.add('active');
     });
 });
 
+// Fungsi utk inisialisasi aplikasi
 function initApp() {
+    // Render tampilan awal
     renderCards(pakaianAdatData);
     renderFavorit();
     updateFavoritCounter();
     updateTotalPakaian();
     
+    // Tambahkan CSS animasi utk notifikasi
     const style = document.createElement('style');
     style.textContent = `
         @keyframes slideIn {
@@ -685,7 +740,7 @@ function initApp() {
     console.log(`Total pakaian adat: ${pakaianAdatData.length}`);
 }
 
-// Hero Effects
+// Efek parallax saat mouse bergerak di hero section
 function initHeroParallax() {
     const heroSection = document.querySelector('.hero-section');
     const heroContent = document.querySelector('.hero-content');
@@ -697,21 +752,27 @@ function initHeroParallax() {
     let currentX = 0;
     let currentY = 0;
 
+    // Tangkap pergerakan mouse
     heroSection.addEventListener('mousemove', (e) => {
         const rect = heroSection.getBoundingClientRect();
+        // Konversi posisi mouse ke nilai -1 sampai 1
         mouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
         mouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
     });
 
+    // Fungsi animasi parallax (smooth follow)
     function animate() {
+        // Smooth interpolation utk efek yg halus
         currentX += (mouseX - currentX) * 0.08;
         currentY += (mouseY - currentY) * 0.08;
 
+        // Gerakkan bg
         const bgMoveX = currentX * 25;
         const bgMoveY = currentY * 25;
         heroSection.style.backgroundPosition = 
             `calc(50% + ${bgMoveX}px) calc(50% + ${bgMoveY}px)`;
 
+        // Gerakkan konten dgn arah berlawanan
         const contentMoveX = currentX * -12;
         const contentMoveY = currentY * -12;
         heroContent.style.transform = 
@@ -722,6 +783,7 @@ function initHeroParallax() {
 
     animate();
 
+    // Reset posisi saat mouse keluar
     heroSection.addEventListener('mouseleave', () => {
         mouseX = 0;
         mouseY = 0;
@@ -730,6 +792,7 @@ function initHeroParallax() {
     console.log('✅ Parallax mouse effect activated');
 }
 
+// Efek mengambang pd tombol "Mulai Menjelajah"
 function initButtonFloat() {
     const btn = document.getElementById('mulaiJelajah');
     if (!btn) return;
@@ -740,6 +803,7 @@ function initButtonFloat() {
     function floatAnimation() {
         floatPos += 0.03 * direction;
         
+        // Balik arah kalau mencapai batas
         if (floatPos > 8) direction = -1;
         if (floatPos < -8) direction = 1;
 
@@ -751,6 +815,7 @@ function initButtonFloat() {
     console.log('✅ Button float animation activated');
 }
 
+// Efek zoom in-out pd bg hero
 function initBackgroundZoom() {
     const heroSection = document.querySelector('.hero-section');
     if (!heroSection) return;
@@ -761,6 +826,7 @@ function initBackgroundZoom() {
     function zoomAnimation() {
         scale += 0.00008 * zoomDirection;
         
+        // Balik arah zoom
         if (scale >= 1.05) zoomDirection = -1;
         if (scale <= 1) zoomDirection = 1;
 
@@ -772,11 +838,12 @@ function initBackgroundZoom() {
     console.log('✅ Background zoom effect activated');
 }
 
+// Efek parallax saat scroll
 function initScrollParallax() {
     const heroSection = document.querySelector('.hero-section');
     if (!heroSection) return;
 
-    let ticking = false;
+    let ticking = false; // Utk optimasi performa
 
     window.addEventListener('scroll', () => {
         if (!ticking) {
@@ -784,6 +851,7 @@ function initScrollParallax() {
                 const scrolled = window.pageYOffset;
                 const heroHeight = heroSection.offsetHeight;
                 
+                // Terapkan efek parallax & fade out saat scroll
                 if (scrolled < heroHeight) {
                     const parallaxSpeed = 0.4;
                     const opacity = 1 - (scrolled / heroHeight);
@@ -803,6 +871,7 @@ function initScrollParallax() {
     console.log('✅ Scroll parallax activated');
 }
 
+// Efek kilau (sparkle) pd hero section
 function initSparkleEffect() {
     const heroSection = document.querySelector('.hero-section');
     if (!heroSection) return;
@@ -811,6 +880,7 @@ function initSparkleEffect() {
         const sparkle = document.createElement('div');
         sparkle.className = 'sparkle';
         
+        // Random size, posisi, & durasi
         const size = Math.random() * 4 + 2;
         const posX = Math.random() * 100;
         const posY = Math.random() * 100;
@@ -830,11 +900,14 @@ function initSparkleEffect() {
         `;
         
         heroSection.appendChild(sparkle);
+        // Hapus elemen setelah animasi selesai
         setTimeout(() => sparkle.remove(), duration * 1000);
     }
 
+    // Buat sparkle baru setiap 800ms
     setInterval(createSparkle, 800);
     
+    // Tambahkan CSS animasi sparkle
     if (!document.getElementById('sparkleStyle')) {
         const style = document.createElement('style');
         style.id = 'sparkleStyle';
@@ -859,6 +932,7 @@ function initSparkleEffect() {
     console.log('✨ Sparkle effect activated');
 }
 
+// Inisialisasi semua efek hero
 function initAllHeroEffects() {
     setTimeout(() => {
         initHeroParallax();
@@ -872,12 +946,14 @@ function initAllHeroEffects() {
     }, 100);
 }
 
+// Jalankan aplikasi saat DOM sudah siap
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         initApp();
         initAllHeroEffects();
     });
 } else {
+    // Kalau DOM sudah ready, langsung jalankan
     initApp();
     initAllHeroEffects();
 }
