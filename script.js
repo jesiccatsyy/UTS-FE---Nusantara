@@ -274,15 +274,32 @@ let filteredData = [...pakaianAdatData];
 let currentFilter = 'semua';
 
 // Mengambil elemen-elemen HTML yg akan digunakan
-const cardGrid = document.getElementById('cardGrid'); // Container utk card koleksi
-const favoritGrid = document.getElementById('favoritGrid'); // Container utk card favorit
-const searchInput = document.getElementById('searchInput'); // Input pencarian
-const searchBtn = document.getElementById('searchBtn'); // Tombol pencarian
-const filterButtons = document.querySelectorAll('.btn-filter'); // Semua tombol filter
-const modal = document.getElementById('detailModal'); // Modal pop-up detail
-const closeModal = document.querySelector('.close-modal'); // Tombol tutup modal
-const totalFavoritSpan = document.getElementById('totalFavorit'); // Counter jumlah favorit
-const totalPakaianSpan = document.getElementById('totalPakaian'); // Counter total pakaian
+ // Container utk card koleksi
+const cardGrid = document.getElementById('cardGrid');
+
+ // Container utk card favorit
+const favoritGrid = document.getElementById('favoritGrid');
+
+// Input pencarian
+const searchInput = document.getElementById('searchInput');
+
+// Tombol pencarian
+const searchBtn = document.getElementById('searchBtn');
+
+ // Semua tombol filter
+const filterButtons = document.querySelectorAll('.btn-filter');
+
+// Modal pop-up detail
+const modal = document.getElementById('detailModal');
+
+// Tombol tutup modal
+const closeModal = document.querySelector('.close-modal');
+
+// Counter jumlah favorit
+const totalFavoritSpan = document.getElementById('totalFavorit');
+
+ // Counter total pakaian
+const totalPakaianSpan = document.getElementById('totalPakaian');
 
 // Fungsi utk menampilkan card pakaian adat ke dalam grid
 function renderCards(data) {
