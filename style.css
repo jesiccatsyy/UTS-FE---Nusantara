@@ -602,9 +602,9 @@ html {
     to { opacity: 1; }
 }
 
-/* CContainer konten modal */
+/* Container konten modal */
 .modal-content {
-    background: white;
+    background: rgb(227, 166, 166);
     margin: 3% auto;
     max-width: 900px;
     border-radius: 20px;
